@@ -2,7 +2,8 @@ AOS.init();
 
 $(document).ready(function () {
   //default hide
-  $("#mobile-menu").slideUp(0);
+  $("#mobile-menu").slideUp();
+  $("#headline").fadeOut();
 
   //mobile menu
   $("#mobile-menu-icon").click(function () {
@@ -25,11 +26,12 @@ $(document).ready(function () {
     if (window.scrollY > 300) {
       $("#header").removeClass("text-white bg-glassy");
       $("#header").addClass("text-black bg-white shadow-sm");
-
-      console.log(window.scrollY);
+      $("#headline").fadeIn(500);
     } else {
       $("#header").removeClass("text-black bg-white shadow-sm");
       $("#header").addClass("text-white bg-glassy");
+      //showing headline
+      $("#headline").fadeOut();
     }
   };
 
@@ -42,4 +44,20 @@ $(document).ready(function () {
     $("#banner-quote").html(`<h1 data-aos="fade-left" data-aos-duration="1500" class="text-white text-center">${quote[quoteIndex]}</h1>`);
     quoteIndex++;
   }, 3000);
+
+  //ajax call to given api
+
+  setInterval(function () {
+    $("#news-text").text("Loading...");
+    $.ajax({
+      url: "http://numbersapi.com/1/30/date?json",
+      dataType: "json",
+    })
+      .then((data) => {
+        $("#news-text").text(data.text);
+      })
+      .catch((err) => {
+        $("#news-text").text("Signal loss to load news");
+      });
+  }, 4000);
 });
