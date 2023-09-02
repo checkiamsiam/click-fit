@@ -1,0 +1,8 @@
+.bg-glassy {
+  backdrop-filter: blur(10px);
+}
+
+#banner h1 {
+  font-size: 4rem !important;
+}
+
