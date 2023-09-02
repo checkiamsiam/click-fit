@@ -1,3 +1,5 @@
+AOS.init();
+
 $("#mobile-menu").slideUp(0);
 
 $("#mobile-menu-icon").click(function () {
