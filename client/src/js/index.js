@@ -60,4 +60,25 @@ $(document).ready(function () {
         $("#news-text").text("Signal loss to load news");
       });
   }, 4000);
+
+  // maping sports
+  sports.forEach((sport , i) => {
+    $("#sports").append(`
+    <div
+    data-aos="fade-up"
+    data-aos-duration=${i === 0 ? "1000" : i === 1 ? "2000" : i === 2 ? "3000" : i === 3 ? "0" : i === 4 ? "0" : "0"}
+    class="portfolio-section-data col-md-4"
+    style="
+      background-image: url(${sport?.image});
+    "
+  >
+    <div class="portfolio-section-text">
+      <div class="portfolio-section-text-inner">
+        <p>${sport?.name}</p>
+        <a href="#">"${sport?.quote}"</a>
+      </div>
+    </div>
+  </div>
+    `);
+  });
 });
