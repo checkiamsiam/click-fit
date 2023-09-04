@@ -62,7 +62,7 @@ $(document).ready(function () {
   }, 4000);
 
   // maping sports
-  sports.forEach((sport , i) => {
+  sports.forEach((sport, i) => {
     $("#sports").append(`
     <div
     data-aos="fade-up"
@@ -80,5 +80,53 @@ $(document).ready(function () {
     </div>
   </div>
     `);
+  });
+
+  const imageUpload = document.getElementById("image-upload");
+  const imageDisplay = document.getElementById("image-display");
+  const uploadedImage = document.getElementById("uploaded-image");
+  const uploadedImageBtn = document.getElementById("uploaded-image-btn");
+  const fileInput = document.getElementById("file-input");
+
+  imageUpload.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    imageUpload.style.backgroundColor = "#e0e0e0";
+  });
+
+  imageUpload.addEventListener("dragleave", () => {
+    imageUpload.style.backgroundColor = "#f7f7f7";
+  });
+
+  imageUpload.addEventListener("drop", (e) => {
+    e.preventDefault();
+    imageUpload.style.backgroundColor = "#f7f7f7";
+
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        uploadedImage.src = e.target.result;
+        uploadedImage.style.display = "block";
+        uploadedImageBtn.style.display = "block";
+      };
+
+      reader.readAsDataURL(file);
+    }
+  });
+
+  fileInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        uploadedImage.src = e.target.result;
+        uploadedImage.style.display = "block";
+        uploadedImageBtn.style.display = "block";
+      };
+
+      reader.readAsDataURL(file);
+    }
   });
 });
