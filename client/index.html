@@ -76,7 +76,7 @@
     <section class="about-section">
       <div class="container">
         <div class="row">
-          <div data-aos="fade-right" data-aos-duration="1000" class="content-column col-lg-6 col-md-12 col-sm-12 order-2">
+          <div data-aos="fade-right" data-aos-duration="1000" class="content-column col-lg-6 col-md-12 col-sm-12 order-2 ">
             <div class="inner-column">
               <div class="sec-title">
                 <span class="title">About us</span>
@@ -98,7 +98,7 @@
           </div>
 
           <!-- Image Column -->
-          <div data-aos="fade-left" data-aos-duration="1000" class="image-column col-lg-6 col-md-12 col-sm-12">
+          <div data-aos="fade-left" data-aos-duration="1000" class="image-column col-lg-6 col-md-12 col-sm-12 d-md-block d-none">
             <div class="inner-column wow fadeInLeft">
               <div class="author-desc">
                 <h2>ClickFit</h2>
@@ -125,29 +125,32 @@
       <div class="row">
         <div class="col-md-12">
           <!-- Image Upload Section -->
-          <div id="image-upload-container" class="row">
-            <label for="file-input" class="col-md-6">
-              <div id="image-upload" class="d-flex justify-content-center flex-column align-content-center">
-                <h4>Wanna show your muscle here?</h4>
-                <h4>Drag and Drop or Click to Upload an Image</h4>
-                <p>(Max file size: 2MB)</p>
-                <input type="file" id="file-input" accept="image/*" style="display: none" />
-                <div class="d-flex justify-content-center">
-                  <img id="uploaded-image" src="#" />
+          <form>
+            <div id="image-upload-container" class="row">
+              <label data-aos="fade-right" data-aos-duration="1000" for="file-input" class="col-md-6">
+                <div id="image-upload" class="d-flex justify-content-center flex-column align-content-center">
+                  <h4>Send Your Image to the Admin</h4>
+
+                  <h4>Drag and Drop or Click to Upload an Image</h4>
+                  <p>(Max file size: 2MB)</p>
+                  <input type="file" id="file-input" accept="image/*" style="display: none" />
+                  <div class="d-flex justify-content-center">
+                    <img id="uploaded-image" src="#" />
+                  </div>
+                  <br />
+                  <button type="button" id="uploaded-image-btn" class="btn btn-primary mt-1">Submit</button>
                 </div>
-                <br />
-                <button id="uploaded-image-btn" class="btn btn-primary mt-2">Submit</button>
-              </div>
-            </label>
-            <div id="image-display" class="col-md-6">
-              <div>
-                <img
-                  id="uploaded-image"
-                  src="https://media.licdn.com/dms/image/C5622AQH-a4cgqSmMRw/feedshare-shrink_2048_1536/0/1582408889843?e=2147483647&v=beta&t=iKHIzobXgnZysmFSIEwXMN4litqZZJWT9iR2bPbL9mg"
-                />
+              </label>
+              <div data-aos="fade-left" data-aos-duration="1000" id="image-display" class="col-md-6">
+                <div>
+                  <img
+                    id="uploaded-image-done"
+                    src="https://media.licdn.com/dms/image/C5622AQH-a4cgqSmMRw/feedshare-shrink_2048_1536/0/1582408889843?e=2147483647&v=beta&t=iKHIzobXgnZysmFSIEwXMN4litqZZJWT9iR2bPbL9mg"
+                  />
+                </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

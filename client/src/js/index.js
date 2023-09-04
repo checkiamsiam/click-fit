@@ -82,51 +82,64 @@ $(document).ready(function () {
     `);
   });
 
-  const imageUpload = document.getElementById("image-upload");
-  const imageDisplay = document.getElementById("image-display");
-  const uploadedImage = document.getElementById("uploaded-image");
-  const uploadedImageBtn = document.getElementById("uploaded-image-btn");
-  const fileInput = document.getElementById("file-input");
+  const $imageUpload = $("#image-upload");
+  const $uploadedImage = $("#uploaded-image");
+  const $uploadedImageBtn = $("#uploaded-image-btn");
+  const $fileInput = $("#file-input");
 
-  imageUpload.addEventListener("dragover", (e) => {
-    e.preventDefault();
-    imageUpload.style.backgroundColor = "#e0e0e0";
-  });
-
-  imageUpload.addEventListener("dragleave", () => {
-    imageUpload.style.backgroundColor = "#f7f7f7";
-  });
-
-  imageUpload.addEventListener("drop", (e) => {
-    e.preventDefault();
-    imageUpload.style.backgroundColor = "#f7f7f7";
-
-    const file = e.dataTransfer.files[0];
+  const setPreviewImage = (file) => {
     if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
 
       reader.onload = (e) => {
-        uploadedImage.src = e.target.result;
-        uploadedImage.style.display = "block";
-        uploadedImageBtn.style.display = "block";
+        $uploadedImage.attr("src", e.target.result);
+        $uploadedImage.show();
+        $uploadedImageBtn.show();
       };
 
       reader.readAsDataURL(file);
     }
+  };
+
+  $imageUpload.on("dragover", (e) => {
+    e.preventDefault();
+    $imageUpload.css("background-color", "#e0e0e0");
   });
 
-  fileInput.addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if (file && file.type.startsWith("image/")) {
-      const reader = new FileReader();
-
-      reader.onload = (e) => {
-        uploadedImage.src = e.target.result;
-        uploadedImage.style.display = "block";
-        uploadedImageBtn.style.display = "block";
-      };
-
-      reader.readAsDataURL(file);
-    }
+  $imageUpload.on("dragleave", () => {
+    $imageUpload.css("background-color", "#f7f7f7");
   });
+
+  $imageUpload.on("drop", (e) => {
+    e.preventDefault();
+    $imageUpload.css("background-color", "#f7f7f7");
+
+    setPreviewImage(e.originalEvent.dataTransfer.files[0]);
+  });
+
+  $fileInput.on("change", (e) => {
+    setPreviewImage(e.target.files[0]);
+  });
+
+  async function handleOnUpload(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const formData = new FormData();
+    formData.append("image", $fileInput[0].files[0]);
+    await $.ajax({
+      type: "POST",
+      url: "http://localhost:5000/api/v1/upload", // Replace with your API endpoint
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        console.log("Data sent successfully:", response);
+      },
+      error: function (error) {
+        console.error("Error sending data:", error);
+      },
+    });
+  }
+
+  $uploadedImageBtn.on("click", handleOnUpload);
 });
