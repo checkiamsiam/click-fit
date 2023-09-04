@@ -134,12 +134,10 @@ $(document).ready(function () {
       processData: false,
       success: function (response) {
         console.log("Data sent successfully:", response);
-      },
-      error: function (error) {
-        console.error("Error sending data:", error);
+        alert("Image uploaded successfully");
       },
     });
   }
 
-  $uploadedImageBtn.on("click", handleOnUpload);
+  $uploadedImageBtn.click(handleOnUpload);
 });
